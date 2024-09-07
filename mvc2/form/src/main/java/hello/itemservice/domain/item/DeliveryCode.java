@@ -1,11 +1,14 @@
 package hello.itemservice.domain.item;
 
-public class DeliveryCode {
-    private String deliveryCode;
-    private String description;
+import lombok.Data;
 
-    public DeliveryCode(String deliveryCode, String description) {
-        this.deliveryCode = deliveryCode;
-        this.description = description;
+@Data
+public class DeliveryCode {
+    private String code;
+    private String displayName;
+
+    public DeliveryCode(String code, String displayName) {
+        this.code = code;
+        this.displayName = displayName;
     }
 }

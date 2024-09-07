@@ -17,9 +17,9 @@ public class Item {
     private Integer quantity;
 
     private boolean open;
-    private List<String>regions;
+    private List<String> regions;
     private ItemType itemType;
-    private DeliveryCode deliveryCode;
+    private String deliveryCode;
 
     public Item() {
     }
