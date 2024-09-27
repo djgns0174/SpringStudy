@@ -71,25 +71,28 @@ public class MemberRepositoryV3 {
         }
     }
 
+
     public Member update(String memberId, int money) throws SQLException {
         String sql = "update member set money = ? where member_id = ?";
 
-        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null
 
         try {
-             conn = getConnection();
+
+            conn = getConnection();
             log.info("connection : {} , con.getClass", conn, conn.getClass());
-             ps = conn.prepareStatement(sql);
-             ps.setInt(1, money);
-             ps.setString(2, memberId);
-             ps.executeUpdate();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, money);
+            ps.setString(2, memberId);
+            ps.executeUpdate();
             return findMember(memberId);
         } catch (SQLException e) {
             throw e;
         }finally {
-            close(conn, ps, rs);
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(ps);
         }
     }
 
@@ -113,7 +116,7 @@ public class MemberRepositoryV3 {
         }
     }
 
-    private Connection getConnection() throws SQLException {
+    private Connection getConnection(){
         Connection connection = DataSourceUtils.getConnection(dataSource);
         return connection;
     }
